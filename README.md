@@ -11,7 +11,8 @@ How to run Storybook:
 
 Time spent on the challenge.
 
-It took almost the fours duration because I wanted to slowly improvement the app and was refactoring the code to make it cleaner and more maintanable
+It took almost the entire four hours duration because I wanted to slowly improve the app and was refactoring the code to make it cleaner and more maintanable
 
 Trade Offs Made:
 Because of the deadline, I had to focus on the requirements first and foremost. I wanted to improvement the styling, add tests and check the responsiveness of the app on other screens.
+Also wasn't able to update the meta details and icons
