@@ -5,6 +5,8 @@ import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { Tag } from "primereact/tag";
 import { Panel } from "primereact/panel";
+import { Tag as PrimeTag } from "primereact/tag";
+import { Fieldset } from "primereact/fieldset";
 import type { User } from "../types/user";
 
 const UserProfile: React.FC = () => {
@@ -64,26 +66,42 @@ const UserProfile: React.FC = () => {
         subTitle={<Tag value={user.username} severity="info" />}
       >
         <Divider align="left">
-          <b>Contact</b>
+          <PrimeTag value="Contact" severity="info" />
         </Divider>
-        <div className="flex flex-wrap gap-2 mb-3">
+        <Fieldset
+          className="mb-3"
+          legend={<span className="hidden">Contact</span>}
+          toggleable={false}
+        >
           <Tag icon="pi pi-envelope" value={user.email} className="mr-2" />
           <Tag icon="pi pi-phone" value={user.phone} className="mr-2" />
           <Tag icon="pi pi-globe" value={user.website} />
-        </div>
+        </Fieldset>
         <Divider align="left">
-          <b>Company</b>
+          <PrimeTag value="Company" severity="info" />
         </Divider>
         <Panel header={user.company.name} className="mb-3">
-          <div>{user.company.catchPhrase}</div>
-          <div className="text-sm text-color-secondary">{user.company.bs}</div>
+          <Fieldset
+            legend={<span className="hidden">Company</span>}
+            toggleable={false}
+          >
+            <span>{user.company.catchPhrase}</span>
+            <span className="text-sm text-color-secondary">
+              {user.company.bs}
+            </span>
+          </Fieldset>
         </Panel>
         <Divider align="left">
-          <b>Address</b>
+          <PrimeTag value="Address" severity="info" />
         </Divider>
         <Panel className="mb-3">
-          {user.address.street}, {user.address.suite},<br />
-          {user.address.city}, {user.address.zipcode}
+          <Fieldset
+            legend={<span className="hidden">Address</span>}
+            toggleable={false}
+          >
+            {user.address.street}, {user.address.suite},<br />
+            {user.address.city}, {user.address.zipcode}
+          </Fieldset>
         </Panel>
       </Card>
       <Button
