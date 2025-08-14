@@ -7,22 +7,19 @@ import { Tag } from "primereact/tag";
 import { Panel } from "primereact/panel";
 import { Fieldset } from "primereact/fieldset";
 import type { User } from "../types/user";
+import { fetchUserById } from "../api/user";
 
 const UserProfile: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
+    fetchUserById(id)
       .then((data) => {
         setUser(data);
         setLoading(false);

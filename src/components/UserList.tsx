@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { User } from "../types/user";
+import { fetchAllUsers } from "../api/users";
 import { DataTable } from "primereact/datatable";
 import type { DataTableRowEvent } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -19,12 +20,8 @@ const UserList: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then((data: User[]) => {
+    fetchAllUsers()
+      .then((data) => {
         setUsers(data);
         setLoading(false);
       })
