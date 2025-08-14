@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { Tag } from "primereact/tag";
 import { Panel } from "primereact/panel";
@@ -8,6 +9,7 @@ import type { User } from "../types/user";
 
 const UserProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -55,34 +57,41 @@ const UserProfile: React.FC = () => {
     );
 
   return (
-    <Card
-      title={user.name}
-      subTitle={<Tag value={user.username} severity="info" />}
-      className="w-full sm:w-8 md:w-6 lg:w-4 mx-auto mt-5"
-    >
-      <Divider align="left">
-        <b>Contact</b>
-      </Divider>
-      <div className="flex flex-wrap gap-2 mb-3">
-        <Tag icon="pi pi-envelope" value={user.email} className="mr-2" />
-        <Tag icon="pi pi-phone" value={user.phone} className="mr-2" />
-        <Tag icon="pi pi-globe" value={user.website} />
-      </div>
-      <Divider align="left">
-        <b>Company</b>
-      </Divider>
-      <Panel header={user.company.name} className="mb-3">
-        <div>{user.company.catchPhrase}</div>
-        <div className="text-sm text-color-secondary">{user.company.bs}</div>
-      </Panel>
-      <Divider align="left">
-        <b>Address</b>
-      </Divider>
-      <Panel className="mb-3">
-        {user.address.street}, {user.address.suite},<br />
-        {user.address.city}, {user.address.zipcode}
-      </Panel>
-    </Card>
+    <div className="w-full sm:w-8 md:w-6 lg:w-4 mx-auto mt-5">
+      <Card
+        title={user.name}
+        className="mb-3"
+        subTitle={<Tag value={user.username} severity="info" />}
+      >
+        <Divider align="left">
+          <b>Contact</b>
+        </Divider>
+        <div className="flex flex-wrap gap-2 mb-3">
+          <Tag icon="pi pi-envelope" value={user.email} className="mr-2" />
+          <Tag icon="pi pi-phone" value={user.phone} className="mr-2" />
+          <Tag icon="pi pi-globe" value={user.website} />
+        </div>
+        <Divider align="left">
+          <b>Company</b>
+        </Divider>
+        <Panel header={user.company.name} className="mb-3">
+          <div>{user.company.catchPhrase}</div>
+          <div className="text-sm text-color-secondary">{user.company.bs}</div>
+        </Panel>
+        <Divider align="left">
+          <b>Address</b>
+        </Divider>
+        <Panel className="mb-3">
+          {user.address.street}, {user.address.suite},<br />
+          {user.address.city}, {user.address.zipcode}
+        </Panel>
+      </Card>
+      <Button
+        label="Back to User List"
+        icon="pi pi-arrow-left"
+        onClick={() => navigate("/users")}
+      />
+    </div>
   );
 };
 
