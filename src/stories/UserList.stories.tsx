@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import UserList from "./UserList";
+import UserList from "../components/UserList";
 import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof UserList> = {
