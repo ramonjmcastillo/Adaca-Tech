@@ -5,7 +5,6 @@ import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { Tag } from "primereact/tag";
 import { Panel } from "primereact/panel";
-import { Tag as PrimeTag } from "primereact/tag";
 import { Fieldset } from "primereact/fieldset";
 import type { User } from "../types/user";
 

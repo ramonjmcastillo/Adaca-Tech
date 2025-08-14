@@ -36,14 +36,14 @@ const UserList: React.FC = () => {
   if (loading)
     return (
       <Card
-        className="mt-5 w-full sm:w-8 md:w-6 lg:w-4 mx-auto"
+        className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto"
         title="Loading..."
       />
     );
   if (error)
     return (
       <Card
-        className="mt-5 w-full sm:w-8 md:w-6 lg:w-4 mx-auto text-red-600"
+        className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto text-red-600"
         title="Error"
       >
         {error}
@@ -51,7 +51,7 @@ const UserList: React.FC = () => {
     );
 
   return (
-    <Card className="mt-5 w-full sm:w-8 md:w-6 lg:w-4 mx-auto">
+    <Card className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto">
       <Divider align="left">
         <Tag value="User List" severity="info" />
       </Divider>
