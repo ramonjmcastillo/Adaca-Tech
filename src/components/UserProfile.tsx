@@ -6,7 +6,9 @@ import { Divider } from "primereact/divider";
 import { Tag } from "primereact/tag";
 import { Panel } from "primereact/panel";
 import { Fieldset } from "primereact/fieldset";
+
 import type { User } from "../types/user";
+
 import { fetchUserById } from "../api/user";
 
 const UserProfile: React.FC = () => {

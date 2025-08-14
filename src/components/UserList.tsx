@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { User } from "../types/user";
-import { fetchAllUsers } from "../api/users";
 import { DataTable } from "primereact/datatable";
-import type { DataTableRowEvent } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Card } from "primereact/card";
 import { Divider } from "primereact/divider";
@@ -11,6 +8,11 @@ import { Tag } from "primereact/tag";
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+
+import type { DataTableRowEvent } from "primereact/datatable";
+import type { User } from "../types/user";
+
+import { fetchAllUsers } from "../api/users";
 
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
