@@ -36,7 +36,7 @@ const UserList: React.FC = () => {
 
   if (loading) return <LoadingPanel />;
   if (error) return <ErrorPanel error={error} />;
-  if (users.length === 0) return <EmptyPanel message="No users found." />;
+  if (!users?.length) return <EmptyPanel message="No users found." />;
 
   return (
     <Card className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto">

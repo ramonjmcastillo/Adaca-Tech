@@ -34,7 +34,7 @@ const UserProfile: React.FC = () => {
 
   if (loading) return <LoadingPanel />;
   if (error) return <ErrorPanel error={error} />;
-  if (!user) return <EmptyPanel message="No user found" />;
+  if (!user?.id) return <EmptyPanel message="No user found" />;
 
   return (
     <div className="w-full sm:w-8 md:w-6 lg:w-4 mx-auto mt-5">
