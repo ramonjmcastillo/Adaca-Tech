@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Card } from "primereact/card";
+import { LoadingPanel, ErrorPanel, EmptyPanel } from "./UIStates";
 import { Divider } from "primereact/divider";
 import { Tag } from "primereact/tag";
 import "primereact/resources/themes/lara-light-blue/theme.css";
@@ -33,22 +34,9 @@ const UserList: React.FC = () => {
       });
   }, []);
 
-  if (loading)
-    return (
-      <Card
-        className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto"
-        title="Loading..."
-      />
-    );
-  if (error)
-    return (
-      <Card
-        className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto text-red-600"
-        title="Error"
-      >
-        {error}
-      </Card>
-    );
+  if (loading) return <LoadingPanel />;
+  if (error) return <ErrorPanel error={error} />;
+  if (users.length === 0) return <EmptyPanel message="No users found." />;
 
   return (
     <Card className="mt-5 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full mx-auto">
