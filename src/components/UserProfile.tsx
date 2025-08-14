@@ -1,0 +1,89 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Card } from "primereact/card";
+import { Divider } from "primereact/divider";
+import { Tag } from "primereact/tag";
+import { Panel } from "primereact/panel";
+import type { User } from "../types/user";
+
+const UserProfile: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    setLoading(true);
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading)
+    return (
+      <Panel
+        header="Loading..."
+        className="mx-auto mt-5 w-full sm:w-8 md:w-6 lg:w-4"
+      />
+    );
+  if (error)
+    return (
+      <Panel
+        header="Error"
+        className="mx-auto mt-5 w-full sm:w-8 md:w-6 lg:w-4 text-red-600"
+      >
+        {error}
+      </Panel>
+    );
+  if (!user)
+    return (
+      <Panel
+        header="No user found"
+        className="mx-auto mt-5 w-full sm:w-8 md:w-6 lg:w-4"
+      />
+    );
+
+  return (
+    <Card
+      title={user.name}
+      subTitle={<Tag value={user.username} severity="info" />}
+      className="w-full sm:w-8 md:w-6 lg:w-4 mx-auto mt-5"
+    >
+      <Divider align="left">
+        <b>Contact</b>
+      </Divider>
+      <div className="flex flex-wrap gap-2 mb-3">
+        <Tag icon="pi pi-envelope" value={user.email} className="mr-2" />
+        <Tag icon="pi pi-phone" value={user.phone} className="mr-2" />
+        <Tag icon="pi pi-globe" value={user.website} />
+      </div>
+      <Divider align="left">
+        <b>Company</b>
+      </Divider>
+      <Panel header={user.company.name} className="mb-3">
+        <div>{user.company.catchPhrase}</div>
+        <div className="text-sm text-color-secondary">{user.company.bs}</div>
+      </Panel>
+      <Divider align="left">
+        <b>Address</b>
+      </Divider>
+      <Panel className="mb-3">
+        {user.address.street}, {user.address.suite},<br />
+        {user.address.city}, {user.address.zipcode}
+      </Panel>
+    </Card>
+  );
+};
+
+export default UserProfile;
