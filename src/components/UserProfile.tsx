@@ -65,7 +65,7 @@ const UserProfile: React.FC = () => {
         subTitle={<Tag value={user.username} severity="info" />}
       >
         <Divider align="left">
-          <PrimeTag value="Contact" severity="info" />
+          <Tag value="Contact" severity="info" />
         </Divider>
         <Fieldset
           className="mb-3"
@@ -77,7 +77,7 @@ const UserProfile: React.FC = () => {
           <Tag icon="pi pi-globe" value={user.website} />
         </Fieldset>
         <Divider align="left">
-          <PrimeTag value="Company" severity="info" />
+          <Tag value="Company" severity="info" />
         </Divider>
         <Panel header={user.company.name} className="mb-3">
           <Fieldset
@@ -91,7 +91,7 @@ const UserProfile: React.FC = () => {
           </Fieldset>
         </Panel>
         <Divider align="left">
-          <PrimeTag value="Address" severity="info" />
+          <Tag value="Address" severity="info" />
         </Divider>
         <Panel className="mb-3">
           <Fieldset

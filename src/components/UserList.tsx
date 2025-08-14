@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { User } from "../types/user";
 import { DataTable } from "primereact/datatable";
+import type { DataTableRowEvent } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Card } from "primereact/card";
 import { Divider } from "primereact/divider";
@@ -23,7 +24,7 @@ const UserList: React.FC = () => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
-      .then((data) => {
+      .then((data: User[]) => {
         setUsers(data);
         setLoading(false);
       })
@@ -60,7 +61,9 @@ const UserList: React.FC = () => {
         paginator
         rows={5}
         stripedRows
-        onRowClick={(e) => navigate(`/users/${e.data.id}`)}
+        onRowClick={(e: DataTableRowEvent) =>
+          navigate(`/users/${(e.data as User).id}`)
+        }
         className="cursor-pointer"
       >
         <Column field="id" header="ID" sortable style={{ width: "80px" }} />
