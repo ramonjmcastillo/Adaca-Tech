@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import type { User } from "../types/user";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { Card } from "primereact/card";
+import { Divider } from "primereact/divider";
+import { Tag } from "primereact/tag";
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
@@ -30,19 +33,35 @@ const UserList: React.FC = () => {
       });
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading)
+    return (
+      <Card
+        className="mt-5 w-full sm:w-8 md:w-6 lg:w-4 mx-auto"
+        title="Loading..."
+      />
+    );
+  if (error)
+    return (
+      <Card
+        className="mt-5 w-full sm:w-8 md:w-6 lg:w-4 mx-auto text-red-600"
+        title="Error"
+      >
+        {error}
+      </Card>
+    );
 
   return (
-    <div>
-      <h2>User List</h2>
+    <Card className="mt-5 w-full sm:w-8 md:w-6 lg:w-4 mx-auto">
+      <Divider align="left">
+        <Tag value="User List" severity="info" />
+      </Divider>
       <DataTable
         value={users}
         paginator
         rows={5}
         stripedRows
         onRowClick={(e) => navigate(`/users/${e.data.id}`)}
-        style={{ cursor: "pointer" }}
+        className="cursor-pointer"
       >
         <Column field="id" header="ID" sortable style={{ width: "80px" }} />
         <Column field="name" header="Name" sortable />
@@ -52,7 +71,7 @@ const UserList: React.FC = () => {
         <Column field="website" header="Website" />
         <Column field="company.name" header="Company" />
       </DataTable>
-    </div>
+    </Card>
   );
 };
 
